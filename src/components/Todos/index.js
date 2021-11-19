@@ -1,10 +1,12 @@
 import React from "react";
+import "./style.css"
 import axios from "axios";
-import { useState, useEffect } from "react";
 import Todo from "../Todo";
+import { useState, useEffect } from "react";
 const Todos = () => {
   let [toDos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     getTodos();
   }, []);
@@ -22,8 +24,8 @@ const Todos = () => {
   //add to list
   const handleClick = (e) => {
     e.preventDefault();
+        //check if text field is empty or not
     if (e.target.task.value) {
-      //check if text field is empty or not
       const response = axios.post("http://localhost:5000/todo", {
         name: e.target.task.value,
       });
@@ -39,6 +41,7 @@ const Todos = () => {
     const response = axios.put(`http://localhost:5000/delTodo/${elem.id}`);
     setTodos(response.data);
     setTodos(toDos);
+
   };
 
   // edit todo
@@ -63,10 +66,9 @@ const Todos = () => {
   };
 
   return (
-    <div>
-      <h1> ToDoList</h1>
+    <div className="todos">
       <form onSubmit={handleClick}>
-        <input type="text" name="task" />
+        <input type="text" name="task" placeholder="Enter your task ..." className="form-input" />
         <button>Add Task</button>
       </form>
       <div>
@@ -76,6 +78,7 @@ const Todos = () => {
             elem={elem}
             deleteTodo={deleteTodo}
             editTodo={editTodo}
+            className="todo"
           />
         ))}
       </div>

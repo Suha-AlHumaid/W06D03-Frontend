@@ -1,0 +1,13 @@
+.header {
+      margin: 2% auto 10% auto;
+      text-align: center;
+      color: #3e403f;
+}
+h1 {
+    font-size: 250%;
+    font-family: 'Playfair Display', serif;
+
+}
+p{
+    letter-spacing: 0.05em;
+}
