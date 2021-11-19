@@ -40,8 +40,7 @@ const Todos = () => {
   const deleteTodo = (elem) => {
     const response = axios.put(`http://localhost:5000/delTodo/${elem.id}`);
     setTodos(response.data);
-    setTodos(toDos);
-
+    setTodos(toDos.filter((todo) => todo.id !== elem.id));
   };
 
   // edit todo
@@ -62,7 +61,9 @@ const Todos = () => {
         })
       );
     }
-    setTodos(toDos);
+    else {
+      setTodos(toDos);
+    }
   };
 
   return (
