@@ -45,15 +45,15 @@ const Todos = () => {
 
   // edit todo
   const editTodo = (e, elem, newTask) => {
- 
+    // e.preventDefault();
     const task = e.target.newTask.value;
-    if (task) {
+ 
       const response = axios.put(`http://localhost:5000/todo/${elem.id}`, {
         name: task,
       });
       setTodos(response.data);
       setTodos(toDos.map((todo) => todo.id == elem.id));
-    }
+
 
   };
 
