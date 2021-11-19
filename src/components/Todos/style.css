@@ -49,9 +49,3 @@ button {
     margin: 7% auto;
     letter-spacing: 0.05em;
 }
-.submits {
-    width: 48%;
-    display: inline-block;
-    float: left;
-    margin-left: 2%;
-}
