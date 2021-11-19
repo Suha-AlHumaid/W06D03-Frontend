@@ -12,6 +12,7 @@ function Todo(props) {
     <div>
       <form
         onSubmit={(e) => {
+    
           props.editTodo(e, props.elem);
         }}
       >

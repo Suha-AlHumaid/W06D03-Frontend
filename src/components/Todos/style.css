@@ -49,3 +49,7 @@ button {
     margin: 7% auto;
     letter-spacing: 0.05em;
 }
+button:hover {
+    transform: translatey(3px);
+    box-shadow: none;
+}

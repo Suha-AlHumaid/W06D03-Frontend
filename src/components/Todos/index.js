@@ -45,32 +45,23 @@ const Todos = () => {
 
   // edit todo
   const editTodo = (e, elem, newTask) => {
+ 
     const task = e.target.newTask.value;
-
     if (task) {
       const response = axios.put(`http://localhost:5000/todo/${elem.id}`, {
         name: task,
       });
       setTodos(response.data);
-      setTodos(
-        toDos.map((todo) => {
-          if (todo.id === elem.id) {
-            todo.name = task;
-          }
-          return todo;
-        })
-      );
+      setTodos(toDos.map((todo) => todo.id == elem.id));
     }
-    else {
-      setTodos(toDos);
-    }
+
   };
 
   return (
     <div className="todos">
       <form onSubmit={handleClick}>
-        <input type="text" name="task" placeholder="Enter your task ..." className="form-input" />
-        <button>Add Task</button>
+        <input type="text" name="task" placeholder="Enter your todo ..." className="form-input" />
+        <button>Add Todo</button>
       </form>
       <div>
         {toDos.map((elem, i) => (
