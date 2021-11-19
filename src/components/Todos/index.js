@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Todo from "../Todo";
 const Todos = () => {
-  const [toDos, setTodos] = useState([]);
+  let [toDos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     getTodos();
@@ -34,14 +34,33 @@ const Todos = () => {
     }
   };
 
+  //delete todo
+  const deleteTodo = (elem) => {
+    const response = axios.put(`http://localhost:5000/delTodo/${elem.id}`);
+    setTodos(response.data);
+    setTodos(toDos);
+  };
 
-      //delete todo
-    const deleteTodo = (elem) => {
-        console.log("dele");
-        const response = axios.put(`http://localhost:5000/delTodo/${elem.id}`);
-        setTodos(response.data);
-        setTodos(toDos)
-    };
+  // edit todo
+  const editTodo = (e, elem, newTask) => {
+    const task = e.target.newTask.value;
+
+    if (task) {
+      const response = axios.put(`http://localhost:5000/todo/${elem.id}`, {
+        name: task,
+      });
+      setTodos(response.data);
+      setTodos(
+        toDos.map((todo) => {
+          if (todo.id === elem.id) {
+            todo.name = task;
+          }
+          return todo;
+        })
+      );
+    }
+    setTodos(toDos);
+  };
 
   return (
     <div>
@@ -51,8 +70,13 @@ const Todos = () => {
         <button>Add Task</button>
       </form>
       <div>
-        {toDos.map((elem,i) => (
-          <Todo key={i} elem={elem} deleteTodo={deleteTodo}/>
+        {toDos.map((elem, i) => (
+          <Todo
+            key={i}
+            elem={elem}
+            deleteTodo={deleteTodo}
+            editTodo={editTodo}
+          />
         ))}
       </div>
     </div>
